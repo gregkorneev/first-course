@@ -60,13 +60,33 @@ public: explicit ReportService(IClock&amp; clock) : clock_(clock) {}
 };</pre></article>
       </div></section>
 
-      <section id="csharp" data-language="csharp" data-discipline="asoiu"><h2>АСОИУ — C#</h2><div class="grid">
-        <article class="card"><h3>Типы и коллекции</h3><p>Используйте <code>List&lt;T&gt;</code> для последовательности, <code>Dictionary&lt;TKey,TValue&gt;</code> для поиска по ключу и <code>foreach</code> для безопасного перебора. Nullable-аннотации помогают заметить возможный <code>null</code> до запуска программы.</p></article>
-        <article class="card"><h3>Классы и свойства</h3><p>Свойство отделяет внешний контракт от хранения данных. Первичный конструктор и выражения <code>=&gt;</code> сокращают простой код, но не должны прятать сложную логику.</p><pre>internal class Circle(double radius) {
-  public double Area =&gt; Math.PI * radius * radius;
+      <section id="csharp" data-language="csharp" data-discipline="asoiu"><h2>АСОИУ — C#</h2><p class="lead">Практический раздел курса: моделирование данных, структуры и коллекции, файлы, архитектура приложений и тестирование.</p><div class="grid">
+        <article class="card"><h3>Точка входа и аргументы</h3><p>Приложение начинается в <code>Main</code> или использует операторы верхнего уровня. Аргументы командной строки находятся в <code>args</code>; проверяйте их число до обращения по индексу. Завершайте программу кодом <code>0</code> при успехе и ненулевым кодом при ошибке.</p><pre>string mode = args[0].ToLower();
+if (mode == "where") return RunWhere(args);
+return 0;</pre></article>
+        <article class="card"><h3>Типы, null и исключения</h3><p>Значимые типы (<code>int</code>, <code>double</code>, <code>bool</code>) хранят значение; ссылочные хранят ссылку и могут быть <code>null</code>. Используйте <code>?</code> для возможной пустой ссылки и бросайте конкретные исключения, например <code>ArgumentException</code> или <code>ArgumentOutOfRangeException</code>.</p></article>
+        <article class="card"><h3>Классы, свойства и первичный конструктор</h3><p>Класс объединяет данные и операции. Свойство отделяет внешний контракт от хранения данных. Первичный конструктор и выражения <code>=&gt;</code> сокращают простой код, но не должны прятать сложную логику.</p><pre>internal class Circle(double radius) : Figure("Круг")
+{
+  public override double Area =&gt; Math.PI * radius * radius;
 }</pre></article>
-        <article class="card"><h3>Интерфейсы и обобщения</h3><p><code>IEnumerable&lt;T&gt;</code> задаёт перебор, <code>IComparable</code> — сравнение, а собственный интерфейс позволяет передать нужное поведение без привязки к классу.</p></article>
-        <article class="card"><h3>Практика курса</h3><p>Материалы АСОИУ используют C# для работы с CSV, разреженными матрицами, собственными коллекциями, внедрением зависимостей, SOLID и модульным тестированием.</p></article>
+        <article class="card"><h3>Полиморфизм: фигуры</h3><p>Абстрактный <code>Figure</code> задаёт обязательное свойство <code>Area</code>; <code>Circle</code>, <code>Rectangle</code> и <code>Square</code> дают свою формулу. Код, принимающий <code>Figure</code>, не зависит от конкретного вида фигуры.</p><pre>abstract class Figure(string type) {
+  public string Type { get; } = type;
+  public abstract double Area { get; }
+}</pre></article>
+        <article class="card"><h3>Интерфейсы и сравнение</h3><p><code>IEnumerable&lt;T&gt;</code> добавляет возможность <code>foreach</code>; <code>IComparable</code> задаёт порядок для сортировки. Собственный интерфейс позволяет передать алгоритму нужное поведение — например, правило того, какое значение матрицы считать пустым.</p></article>
+        <article class="card"><h3>Обобщения</h3><p><code>List&lt;T&gt;</code> хранит последовательность, <code>Dictionary&lt;TKey,TValue&gt;</code> ищет по ключу, а <code>Matrix&lt;T&gt;</code> или <code>SimpleList&lt;T&gt;</code> работают с любым подходящим типом. Ограничение <code>where T : IComparable</code> разрешает вызвать <code>CompareTo</code> внутри универсального класса.</p></article>
+        <article class="card"><h3>Разреженная матрица</h3><p>Не храните большую матрицу целиком, если большинство ячеек пустые. В примере курса значения лежат в <code>Dictionary&lt;(int x, int y), T&gt;</code>: память расходуется на заполненные клетки. Индексатор <code>this[x, y]</code> даёт доступ как к обычной матрице и обязан проверять границы.</p><pre>readonly Dictionary&lt;(int x, int y), T&gt; data = [];
+public T this[int x, int y] {
+  get =&gt; data.TryGetValue((x, y), out var v) ? v : empty;
+  set =&gt; data[(x, y)] = value;
+}</pre></article>
+        <article class="card"><h3>Связный список и стек</h3><p>Узел списка содержит данные и ссылку <code>Next</code>. Храните <code>first</code>, <code>last</code> и <code>Count</code>: добавление в хвост будет <code>O(1)</code>. Стек строится поверх списка: <code>Push</code> добавляет, <code>Pop</code> возвращает и удаляет последний элемент.</p></article>
+        <article class="card"><h3>CSV: чтение и запись</h3><p>Работайте со входом через <code>TextReader</code>, а с выводом — через <code>TextWriter</code>: так функцию легко тестировать. Сначала считайте заголовки, затем строки. Проверяйте пустой вход, отсутствие колонки, число полей и формат чисел.</p><pre>using var reader = File.OpenText("data.csv");
+string? line = reader.ReadLine();
+if (line is null) throw new InvalidOperationException();</pre></article>
+        <article class="card"><h3>Операции над табличными данными</h3><p>В семинарском коде реализованы аналоги SQL-операций: <b>projection</b> выбирает столбцы, <b>where</b> фильтрует строки, <b>join</b> объединяет таблицы по ключам, <b>group_avg</b> группирует и считает среднее. Сначала найдите индекс столбца по заголовку, затем перебирайте строки.</p></article>
+        <article class="card"><h3>SOLID и внедрение зависимостей</h3><p>Разделяйте чтение CSV, обработку таблицы и вывод: это принцип одной ответственности. Зависимость передаётся в конструктор как интерфейс, а не создаётся внутри класса. Так алгоритм не связан с файловой системой, временем или конкретным хранилищем.</p></article>
+        <article class="card"><h3>Тестирование</h3><p>Тестируйте поведение, а не внутренние поля: обычный сценарий, границы и ошибки. Удобный шаблон — Arrange (подготовка), Act (действие), Assert (проверка). Для функций обработки CSV подайте <code>StringReader</code> и проверьте результат через <code>StringWriter</code>, не создавая реальные файлы.</p></article>
       </div></section>
 
       <section id="structures" data-language="csharp cplusplus theory" data-discipline="programming oop asoiu"><h2>Структуры данных</h2><table><thead><tr><th>Структура</th><th>Главная идея</th><th>Ключевые операции</th></tr></thead><tbody>
