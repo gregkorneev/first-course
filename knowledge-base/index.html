@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Первый курс — база знаний</title>
+  <style>
+    :root { --ink:#19232f; --muted:#627080; --paper:#f7f8f5; --card:#fff; --accent:#176b87; --line:#dce3e5; --code:#182630; }
+    * { box-sizing:border-box } body { margin:0; font:16px/1.58 Inter, ui-sans-serif, system-ui, -apple-system, sans-serif; color:var(--ink); background:var(--paper) }
+    header { background:linear-gradient(125deg,#102d3c,#176b87); color:white; padding:58px max(24px, calc((100% - 1100px)/2)); }
+    header p { max-width:690px; margin:12px 0 0; color:#d8edf3; font-size:1.08rem } h1 { margin:0; font-size:clamp(2rem,5vw,3.5rem); line-height:1.08 } h2 { font-size:1.6rem; margin:0 0 18px } h3 { margin:0 0 8px; font-size:1.05rem }
+    .shell { max-width:1100px; margin:auto; padding:25px 24px 80px; display:grid; grid-template-columns:240px minmax(0,1fr); gap:38px }
+    nav { position:sticky; top:16px; align-self:start } nav a { display:block; padding:7px 10px; color:var(--muted); text-decoration:none; border-left:2px solid transparent } nav a:hover { color:var(--accent); border-color:var(--accent) }
+    .search { width:100%; border:1px solid var(--line); border-radius:10px; padding:13px 14px; font:inherit; margin-bottom:16px; background:white; outline-color:var(--accent) }
+    .filters { display:grid; gap:10px; margin:0 0 25px } .filter { display:flex; flex-wrap:wrap; gap:7px; align-items:center } .filter b { margin-right:4px; font-size:.88rem } .filter button { cursor:pointer; border:1px solid var(--line); background:#fff; color:var(--muted); padding:5px 10px; border-radius:99px; font:inherit; font-size:.86rem } .filter button[aria-pressed="true"] { background:var(--accent); color:#fff; border-color:var(--accent) }
+    section { margin:0 0 42px; scroll-margin-top:20px } .lead { color:var(--muted); margin-top:-10px } .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px }
+    .card { background:var(--card); padding:19px; border:1px solid var(--line); border-radius:12px; box-shadow:0 1px 1px #13222b08 } .card p:last-child { margin-bottom:0 }
+    code, pre { font-family:"SFMono-Regular",Consolas,monospace } code { color:#a1421a; font-size:.9em } pre { overflow:auto; margin:12px 0 0; padding:14px; border-radius:8px; background:var(--code); color:#e9f3f5; line-height:1.45; font-size:.84rem }
+    table { width:100%; border-collapse:collapse; background:white; border-radius:12px; overflow:hidden; border-style:hidden; box-shadow:0 0 0 1px var(--line) } th,td { padding:11px 13px; text-align:left; border:1px solid var(--line) } th { background:#e8f2f4; font-weight:650 } .tag { display:inline-block; padding:2px 8px; font-size:.76rem; border-radius:99px; background:#dceff3; color:#12546d; font-weight:650 } details { background:white; border:1px solid var(--line); border-radius:10px; padding:13px 16px; margin:9px 0 } summary { cursor:pointer; font-weight:650 } .answer { color:var(--muted); margin:12px 0 2px } .hidden { display:none!important } footer { color:var(--muted); font-size:.9rem; margin-top:50px }
+    @media(max-width:760px) { .shell { display:block } nav { position:static; display:flex; overflow:auto; gap:4px; margin-bottom:20px; white-space:nowrap } nav a { border-left:0; border-bottom:2px solid transparent } .grid { grid-template-columns:1fr } header { padding:40px 24px } }
+  </style>
+</head>
+<body>
+  <header><h1>Первый курс<br>База знаний</h1><p>Короткий маршрут повторения: от синтаксиса C# и ООП до алгоритмов, архитектуры и тестов. Используйте поиск, чтобы быстро вернуться к нужному понятию перед семинаром или экзаменом.</p></header>
+  <div class="shell">
+    <nav aria-label="Разделы"><a href="#start">Маршрут</a><a href="#cpp">Основы C++</a><a href="#oop">ООП на C++</a><a href="#csharp">АСОИУ на C#</a><a href="#structures">Структуры данных</a><a href="#algorithms">Алгоритмы</a><a href="#quality">Качество и данные</a><a href="#check">Самопроверка</a><a href="#sources">Источники</a></nav>
+    <main>
+      <input id="search" class="search" type="search" placeholder="Поиск: например, «полиморфизм», «BFS», «сложность»" aria-label="Поиск по базе знаний">
+      <div class="filters" aria-label="Фильтры материалов">
+        <div class="filter" data-filter="language"><b>Язык:</b><button aria-pressed="true" data-value="all">Все</button><button data-value="cplusplus">C++</button><button data-value="csharp">C#</button><button data-value="theory">Общее</button></div>
+        <div class="filter" data-filter="discipline"><b>Дисциплина:</b><button aria-pressed="true" data-value="all">Все</button><button data-value="programming">Основы программирования (C++)</button><button data-value="oop">ООП (C++)</button><button data-value="asoiu">АСОИУ (C#)</button></div>
+      </div>
+
+      <section id="start" data-language="theory" data-discipline="programming oop asoiu"><h2>Как повторять</h2><p class="lead">Сначала закрепите понятия, затем — операции и их сложность, после этого объясняйте решения вслух на примерах.</p><div class="grid">
+        <article class="card"><span class="tag">1. Основа</span><h3>Язык</h3><p>Типы, выражения, ветвления, циклы, массивы, функции, ссылки и исключения. Без этого ООП остаётся только терминологией.</p></article>
+        <article class="card"><span class="tag">2. Модель</span><h3>Проектирование</h3><p>Класс, объект, контракт, наследование, композиция и зависимости. Для каждого решения отвечайте: «кто за что отвечает?».</p></article>
+        <article class="card"><span class="tag">3. Эффективность</span><h3>Алгоритмы</h3><p>Определяйте доминирующую операцию, оценивайте время и память, выбирайте структуру данных под операцию.</p></article>
+        <article class="card"><span class="tag">4. Практика</span><h3>Надёжность</h3><p>Проверяйте граничные случаи, отделяйте зависимости и покрывайте поведение тестами.</p></article>
+      </div></section>
+
+      <section id="cpp" data-language="cplusplus" data-discipline="programming"><h2>Основы программирования — C++</h2><div class="grid">
+        <article class="card"><h3>Типы и значения</h3><p><code>int</code>, <code>double</code>, <code>bool</code>, <code>char</code>, <code>string</code>. Значимые типы хранят значение; ссылочные — ссылку на объект. <code>null</code> допустим для ссылочных и nullable-типов.</p></article>
+        <article class="card"><h3>Управление потоком</h3><p><code>if / switch</code> выбирают ветку; <code>for</code> удобен при известном счётчике; <code>while</code> — пока истинно условие; <code>foreach</code> — перебор коллекции без индекса.</p></article>
+        <article class="card"><h3>Функция как контракт</h3><p>Сигнатура задаёт имя, параметры и возвращаемый тип. Аргументы передаются по значению; ссылка или указатель позволяют работать с исходным объектом. Функция должна иметь одну ясную ответственность.</p><pre>int max(int a, int b) { return a &gt; b ? a : b; }</pre></article>
+        <article class="card"><h3>Массивы, строки и указатели</h3><p>Массив имеет фиксированную длину и доступ по индексу <code>O(1)</code>. Указатель хранит адрес объекта; его нужно разыменовывать только для существующего объекта. Для строк и динамических массивов предпочтительны <code>std::string</code> и <code>std::vector</code>.</p></article>
+        <article class="card"><h3>Исключения</h3><p>Исключение сообщает об ошибочной ситуации, которую нельзя корректно продолжить в текущем месте. Перехватывайте только ожидаемые исключения; не используйте их для обычной логики.</p></article>
+        <article class="card"><h3>Шаблоны</h3><p><code>std::vector&lt;T&gt;</code>, <code>std::map&lt;Key, Value&gt;</code> и собственные шаблоны позволяют писать один код для разных типов. <code>constexpr</code> переносит допустимые вычисления на этап компиляции.</p></article>
+      </div></section>
+
+      <section id="oop" data-language="cplusplus" data-discipline="oop"><h2>ООП — C++</h2><div class="grid">
+        <article class="card"><h3>Класс и объект</h3><p>Класс — описание состояния и поведения; объект — конкретный экземпляр. Инкапсуляция скрывает внутреннее представление и открывает безопасные операции через методы/свойства.</p></article>
+        <article class="card"><h3>Наследование и полиморфизм</h3><p>Наследование выражает отношение «является». Базовый тип задаёт общий контракт, наследник уточняет реализацию. Полиморфизм в C++ требует виртуальных методов и обычно работы через ссылку или указатель на базовый класс.</p><pre>struct Figure { virtual double area() const = 0; virtual ~Figure() = default; };
+struct Circle : Figure { double r; double area() const override { return 3.14*r*r; } };</pre></article>
+        <article class="card"><h3>Интерфейс и абстрактный класс</h3><p>В C++ интерфейс обычно выражается абстрактным классом с чисто виртуальными методами. Базовый класс может содержать общую реализацию и состояние; избегайте наследования, если достаточно композиции.</p></article>
+        <article class="card"><h3>Композиция</h3><p>«Содержит» обычно лучше «является»: объект получает нужное поведение через поле/параметр. Так зависимости проще заменить в тесте и развивать независимо.</p></article>
+        <article class="card"><h3>SOLID — практическая памятка</h3><p><b>S</b> — одна причина менять класс. <b>O</b> — расширять без переписывания устойчивого кода. <b>L</b> — подтип не ломает ожиданий базового типа. <b>I</b> — маленькие целевые интерфейсы. <b>D</b> — зависеть от абстракции, а не конкретного класса.</p></article>
+        <article class="card"><h3>Внедрение зависимостей</h3><p>Зависимость передаётся извне, чаще через конструктор. Это делает требования класса явными и убирает жёсткую привязку к конкретной реализации.</p><pre>class ReportService {
+  IClock&amp; clock_;
+public: explicit ReportService(IClock&amp; clock) : clock_(clock) {}
+};</pre></article>
+      </div></section>
+
+      <section id="csharp" data-language="csharp" data-discipline="asoiu"><h2>АСОИУ — C#</h2><div class="grid">
+        <article class="card"><h3>Типы и коллекции</h3><p>Используйте <code>List&lt;T&gt;</code> для последовательности, <code>Dictionary&lt;TKey,TValue&gt;</code> для поиска по ключу и <code>foreach</code> для безопасного перебора. Nullable-аннотации помогают заметить возможный <code>null</code> до запуска программы.</p></article>
+        <article class="card"><h3>Классы и свойства</h3><p>Свойство отделяет внешний контракт от хранения данных. Первичный конструктор и выражения <code>=&gt;</code> сокращают простой код, но не должны прятать сложную логику.</p><pre>internal class Circle(double radius) {
+  public double Area =&gt; Math.PI * radius * radius;
+}</pre></article>
+        <article class="card"><h3>Интерфейсы и обобщения</h3><p><code>IEnumerable&lt;T&gt;</code> задаёт перебор, <code>IComparable</code> — сравнение, а собственный интерфейс позволяет передать нужное поведение без привязки к классу.</p></article>
+        <article class="card"><h3>Практика курса</h3><p>Материалы АСОИУ используют C# для работы с CSV, разреженными матрицами, собственными коллекциями, внедрением зависимостей, SOLID и модульным тестированием.</p></article>
+      </div></section>
+
+      <section id="structures" data-language="csharp cplusplus theory" data-discipline="programming oop asoiu"><h2>Структуры данных</h2><table><thead><tr><th>Структура</th><th>Главная идея</th><th>Ключевые операции</th></tr></thead><tbody>
+        <tr><td>Массив / List</td><td>Последовательность с индексом</td><td>доступ <code>O(1)</code>, поиск <code>O(n)</code>, вставка внутри <code>O(n)</code></td></tr>
+        <tr><td>Связный список</td><td>Узлы со ссылками</td><td>вставка у известного узла <code>O(1)</code>, доступ по номеру <code>O(n)</code></td></tr>
+        <tr><td>Стек</td><td>LIFO: последний вошёл — первый вышел</td><td><code>Push/Pop/Peek</code> обычно <code>O(1)</code>; вызовы функций, DFS, Undo</td></tr>
+        <tr><td>Очередь</td><td>FIFO: первый вошёл — первый вышел</td><td><code>Enqueue/Dequeue</code> обычно <code>O(1)</code>; BFS, обработка задач</td></tr>
+        <tr><td>Хеш-таблица</td><td>Ключ преобразуется в индекс</td><td>словарь: среднее <code>O(1)</code>, худшее <code>O(n)</code></td></tr>
+        <tr><td>BST / AVL</td><td>Слева меньшие, справа большие ключи</td><td>сбалансированное дерево: поиск/вставка/удаление <code>O(log n)</code></td></tr>
+        <tr><td>Куча</td><td>Родитель приоритетнее потомков</td><td>очередь с приоритетом: максимум/минимум <code>O(1)</code>, вставка/извлечение <code>O(log n)</code></td></tr>
+      </tbody></table><p class="lead">AVL-дерево поддерживает разность высот поддеревьев не более 1 и восстанавливает баланс поворотами. B/B+‑деревья уменьшают число обращений к диску; в B+ данные лежат в листьях, что удобно для диапазонных запросов.</p></section>
+
+      <section id="algorithms" data-language="cplusplus theory" data-discipline="programming"><h2>Алгоритмы и оценка сложности</h2><div class="grid">
+        <article class="card"><h3>Асимптотика</h3><p><code>O</code> — верхняя граница роста, <code>Ω</code> — нижняя, <code>Θ</code> — точный порядок. Отбрасывайте константы и младшие члены: <code>3n² + 2n → Θ(n²)</code>.</p></article>
+        <article class="card"><h3>Рекурсия</h3><p>База останавливает вызовы, рекурсивный шаг уменьшает задачу. Для <code>T(n)=aT(n/b)+f(n)</code> сравните <code>f(n)</code> с <code>n^log_b(a)</code> (основная теорема).</p></article>
+        <article class="card"><h3>Сортировки</h3><p>Вставками: <code>O(n²)</code>, лучший <code>O(n)</code>, устойчива. QuickSort: среднее <code>O(n log n)</code>, худшее <code>O(n²)</code>, опорный элемент критичен. MergeSort: <code>O(n log n)</code>, требует дополнительной памяти.</p></article>
+        <article class="card"><h3>Поиск</h3><p>Линейный поиск — <code>O(n)</code>. Бинарный — <code>O(log n)</code>, но только в отсортированной последовательности. Задача выбора k-го элемента решается QuickSelect в среднем за <code>O(n)</code>.</p></article>
+        <article class="card"><h3>Графы</h3><p>Представление: матрица смежности удобна для проверки ребра; список смежности — для разреженных графов. DFS идёт в глубину и использует стек; BFS идёт по слоям и использует очередь.</p></article>
+        <article class="card"><h3>Кратчайший путь</h3><p>BFS даёт кратчайший путь в невзвешенном графе. Дейкстра работает при неотрицательных весах. A* выбирает минимум <code>f(n)=g(n)+h(n)</code>; при допустимой эвристике находит оптимальный путь.</p></article>
+      </div><table><thead><tr><th>Алгоритм</th><th>Когда выбирать</th><th>Важно помнить</th></tr></thead><tbody><tr><td>BFS</td><td>минимум рёбер / одинаковая цена шагов</td><td>полный, но память <code>O(b^d)</code></td></tr><tr><td>DFS</td><td>обход, компоненты, ограниченная память</td><td>не гарантирует кратчайший путь; отмечайте посещённые вершины</td></tr><tr><td>Крускал / Прим</td><td>минимальное остовное дерево</td><td>Крускал сортирует рёбра; Прим наращивает одно дерево</td></tr></tbody></table></section>
+
+      <section id="quality" data-language="csharp" data-discipline="asoiu"><h2>АСОИУ: качество, тесты и данные</h2><div class="grid">
+        <article class="card"><h3>Тестирование</h3><p>Ошибка дешевле всего на этапе разработки. Тест описывает ожидаемое поведение: подготовка (Arrange), действие (Act), проверка (Assert). Проверяйте обычные, граничные и ошибочные сценарии.</p></article>
+        <article class="card"><h3>Рефакторинг</h3><p>Изменение внутренней структуры без изменения наблюдаемого поведения. Делайте маленькие шаги и запускайте тесты после каждого; сначала устраните дублирование и смешение ответственностей.</p></article>
+        <article class="card"><h3>Файлы и CSV</h3><p>CSV — строки записей с разделителями. Учитывайте кодировку, заголовок, пустые поля и кавычки. Валидация входа должна быть рядом с чтением данных.</p></article>
+        <article class="card"><h3>Реляционные данные</h3><p>Таблица состоит из строк и столбцов. Базовый SQL: <code>CREATE/DROP</code> меняют схему; <code>SELECT</code> читает; <code>INSERT/UPDATE/DELETE</code> меняют данные. <code>WHERE</code> фильтрует строки.</p></article>
+      </div></section>
+
+      <section id="check" data-language="csharp cplusplus theory" data-discipline="programming oop asoiu"><h2>Самопроверка</h2><p class="lead">Раскройте ответ только после собственной формулировки.</p>
+        <details><summary>Чем интерфейс отличается от абстрактного класса?</summary><p class="answer">Интерфейс описывает контракт возможностей и не хранит состояние экземпляра; класс может реализовать несколько интерфейсов. Абстрактный класс может содержать общую реализацию и состояние, но базовый класс только один.</p></details>
+        <details><summary>Почему бинарный поиск нельзя запускать на произвольном массиве?</summary><p class="answer">Его решение «отбросить половину» верно только если элементы упорядочены. Иначе положение среднего не говорит, где находится искомый элемент.</p></details>
+        <details><summary>Когда BFS находит кратчайший путь?</summary><p class="answer">В невзвешенном графе или когда все рёбра имеют одинаковую стоимость: вершины рассматриваются по неубывающему числу рёбер от старта.</p></details>
+        <details><summary>Что нарушает принцип единственной ответственности?</summary><p class="answer">Класс, который одновременно хранит данные, считает бизнес-правила, читает файл и выводит в консоль: у него несколько независимых причин измениться.</p></details>
+        <details><summary>Как проверить корректность рекурсивной функции?</summary><p class="answer">Назвать базовый случай, доказать уменьшение задачи и проверить, что рекурсивный шаг сохраняет требуемый результат. Для сложности составить рекуррентность.</p></details>
+        <details><summary>Для чего передавать зависимость через конструктор?</summary><p class="answer">Класс явно объявляет, что ему нужно, не создаёт конкретную реализацию сам и получает заменяемую зависимость — например, тестовый двойник.</p></details>
+      </section>
+
+      <section id="sources" data-language="csharp cplusplus theory" data-discipline="programming oop asoiu"><h2>На чём основана база</h2><p class="lead">Сжатое изложение подготовлено по локальным материалам репозитория: конспектам и презентациям по ОП/ООП, лекциям по архитектуре и семинарским примерам C#.</p><div class="grid"><article class="card"><h3>Основы программирования — C++</h3><p><code>Lecture-Theory_OP-main/Конспекты</code>: синтаксис, типы, массивы, функции, указатели, анализ сложности, деревья, графы и поиск.</p></article><article class="card"><h3>ООП (C++) и АСОИУ (C#)</h3><p><code>Lecture-2-main</code> и <code>course-architecture-main</code>: классы, отношения, наследование, SOLID, DI, тестирование, CSV и структуры данных.</p></article></div></section>
+      <footer>Это статический файл: его можно открыть двойным щелчком или разместить на любом статическом хостинге.</footer>
+    </main>
+  </div>
+  <script>
+    const input = document.querySelector('#search'), sections = [...document.querySelectorAll('main section')];
+    const filters = { language: 'all', discipline: 'all' };
+    const applyFilters = () => { const q = input.value.trim().toLowerCase(); sections.forEach(section => {
+      const matchesText = !q || section.textContent.toLowerCase().includes(q);
+      const matchesLanguage = filters.language === 'all' || section.dataset.language.includes(filters.language);
+      const matchesDiscipline = filters.discipline === 'all' || section.dataset.discipline.includes(filters.discipline);
+      section.classList.toggle('hidden', !(matchesText && matchesLanguage && matchesDiscipline));
+    }); };
+    input.addEventListener('input', applyFilters);
+    document.querySelectorAll('[data-filter] button').forEach(button => button.addEventListener('click', () => {
+      const group = button.closest('[data-filter]'), filter = group.dataset.filter;
+      filters[filter] = button.dataset.value;
+      group.querySelectorAll('button').forEach(item => item.setAttribute('aria-pressed', item === button));
+      applyFilters();
+    }));
+  </script>
+</body>
+</html>
