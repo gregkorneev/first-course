@@ -5,18 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Первый курс — база знаний</title>
   <style>
-    :root { --ink:#19232f; --muted:#627080; --paper:#f7f8f5; --card:#fff; --accent:#176b87; --line:#dce3e5; --code:#182630; }
+    :root { color-scheme:light dark; --ink:#19232f; --muted:#627080; --paper:#f7f8f5; --card:#fff; --accent:#176b87; --line:#dce3e5; --code:#182630; --table-head:#e8f2f4; --header-start:#102d3c; --header-end:#176b87; }
+    @media (prefers-color-scheme: dark) { :root { --ink:#e8edf1; --muted:#aebac4; --paper:#10181e; --card:#17232b; --accent:#73cde9; --line:#2a3b46; --code:#0c141a; --table-head:#1c3540; --header-start:#07161d; --header-end:#12475a; } }
     * { box-sizing:border-box } body { margin:0; font:16px/1.58 Inter, ui-sans-serif, system-ui, -apple-system, sans-serif; color:var(--ink); background:var(--paper) }
-    header { background:linear-gradient(125deg,#102d3c,#176b87); color:white; padding:58px max(24px, calc((100% - 1100px)/2)); }
+    header { background:linear-gradient(125deg,var(--header-start),var(--header-end)); color:white; padding:58px max(24px, calc((100% - 1100px)/2)); }
     header p { max-width:690px; margin:12px 0 0; color:#d8edf3; font-size:1.08rem } h1 { margin:0; font-size:clamp(2rem,5vw,3.5rem); line-height:1.08 } h2 { font-size:1.6rem; margin:0 0 18px } h3 { margin:0 0 8px; font-size:1.05rem }
     .shell { max-width:1100px; margin:auto; padding:25px 24px 80px; display:grid; grid-template-columns:240px minmax(0,1fr); gap:38px }
     nav { position:sticky; top:16px; align-self:start } nav a { display:block; padding:7px 10px; color:var(--muted); text-decoration:none; border-left:2px solid transparent } nav a:hover { color:var(--accent); border-color:var(--accent) }
-    .search { width:100%; border:1px solid var(--line); border-radius:10px; padding:13px 14px; font:inherit; margin-bottom:16px; background:white; outline-color:var(--accent) }
-    .filters { display:grid; gap:10px; margin:0 0 25px } .filter { display:flex; flex-wrap:wrap; gap:7px; align-items:center } .filter b { margin-right:4px; font-size:.88rem } .filter button { cursor:pointer; border:1px solid var(--line); background:#fff; color:var(--muted); padding:5px 10px; border-radius:99px; font:inherit; font-size:.86rem } .filter button[aria-pressed="true"] { background:var(--accent); color:#fff; border-color:var(--accent) }
+    .search { width:100%; border:1px solid var(--line); border-radius:10px; padding:13px 14px; font:inherit; margin-bottom:16px; background:var(--card); color:var(--ink); outline-color:var(--accent) }
+    .filters { display:grid; gap:10px; margin:0 0 25px } .filter { display:flex; flex-wrap:wrap; gap:7px; align-items:center } .filter b { margin-right:4px; font-size:.88rem } .filter button { cursor:pointer; border:1px solid var(--line); background:var(--card); color:var(--muted); padding:5px 10px; border-radius:99px; font:inherit; font-size:.86rem } .filter button[aria-pressed="true"] { background:var(--accent); color:#07161d; border-color:var(--accent) }
     section { margin:0 0 42px; scroll-margin-top:20px } .lead { color:var(--muted); margin-top:-10px } .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px }
     .card { background:var(--card); padding:19px; border:1px solid var(--line); border-radius:12px; box-shadow:0 1px 1px #13222b08 } .card p:last-child { margin-bottom:0 }
     code, pre { font-family:"SFMono-Regular",Consolas,monospace } code { color:#a1421a; font-size:.9em } pre { overflow:auto; margin:12px 0 0; padding:14px; border-radius:8px; background:var(--code); color:#e9f3f5; line-height:1.45; font-size:.84rem }
-    table { width:100%; border-collapse:collapse; background:white; border-radius:12px; overflow:hidden; border-style:hidden; box-shadow:0 0 0 1px var(--line) } th,td { padding:11px 13px; text-align:left; border:1px solid var(--line) } th { background:#e8f2f4; font-weight:650 } .tag { display:inline-block; padding:2px 8px; font-size:.76rem; border-radius:99px; background:#dceff3; color:#12546d; font-weight:650 } details { background:white; border:1px solid var(--line); border-radius:10px; padding:13px 16px; margin:9px 0 } summary { cursor:pointer; font-weight:650 } .answer { color:var(--muted); margin:12px 0 2px } .hidden { display:none!important } footer { color:var(--muted); font-size:.9rem; margin-top:50px }
+    table { width:100%; border-collapse:collapse; background:var(--card); border-radius:12px; overflow:hidden; border-style:hidden; box-shadow:0 0 0 1px var(--line) } th,td { padding:11px 13px; text-align:left; border:1px solid var(--line) } th { background:var(--table-head); font-weight:650 } .tag { display:inline-block; padding:2px 8px; font-size:.76rem; border-radius:99px; background:#dceff3; color:#12546d; font-weight:650 } details { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:13px 16px; margin:9px 0 } summary { cursor:pointer; font-weight:650 } .answer { color:var(--muted); margin:12px 0 2px } .hidden { display:none!important } footer { color:var(--muted); font-size:.9rem; margin-top:50px }
     @media(max-width:760px) {
       body { font-size:16px; line-height:1.55 }
       header { padding:34px 20px 30px } header p { font-size:1rem }
@@ -24,9 +25,9 @@
       nav { position:sticky; z-index:5; top:0; display:flex; overflow-x:auto; gap:2px; margin:0 -14px; padding:10px 14px 8px; white-space:nowrap; background:var(--paper); border-bottom:1px solid var(--line); -webkit-overflow-scrolling:touch }
       nav a { flex:none; padding:9px 10px; border-left:0; border-bottom:2px solid transparent; font-size:.9rem }
       main { padding-top:16px } .search { min-height:48px; margin-bottom:12px; font-size:16px }
-      .filters { gap:8px; margin-bottom:26px; padding:12px; border:1px solid var(--line); border-radius:12px; background:#fff }
+      .filters { gap:8px; margin-bottom:26px; padding:12px; border:1px solid var(--line); border-radius:12px; background:var(--card) }
       .filter { flex-wrap:nowrap; overflow-x:auto; padding-bottom:3px; -webkit-overflow-scrolling:touch }
-      .filter b { flex:none; position:sticky; left:0; padding:7px 5px 7px 0; background:#fff; font-size:.82rem }
+      .filter b { flex:none; position:sticky; left:0; padding:7px 5px 7px 0; background:var(--card); font-size:.82rem }
       .filter button { flex:none; min-height:40px; padding:7px 12px; font-size:.86rem }
       section { margin-bottom:34px; scroll-margin-top:64px } h2 { font-size:1.4rem; margin-bottom:12px } h3 { font-size:1.03rem }
       .grid { grid-template-columns:1fr; gap:11px } .card { padding:16px; border-radius:10px }
