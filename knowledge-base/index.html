@@ -17,7 +17,23 @@
     .card { background:var(--card); padding:19px; border:1px solid var(--line); border-radius:12px; box-shadow:0 1px 1px #13222b08 } .card p:last-child { margin-bottom:0 }
     code, pre { font-family:"SFMono-Regular",Consolas,monospace } code { color:#a1421a; font-size:.9em } pre { overflow:auto; margin:12px 0 0; padding:14px; border-radius:8px; background:var(--code); color:#e9f3f5; line-height:1.45; font-size:.84rem }
     table { width:100%; border-collapse:collapse; background:white; border-radius:12px; overflow:hidden; border-style:hidden; box-shadow:0 0 0 1px var(--line) } th,td { padding:11px 13px; text-align:left; border:1px solid var(--line) } th { background:#e8f2f4; font-weight:650 } .tag { display:inline-block; padding:2px 8px; font-size:.76rem; border-radius:99px; background:#dceff3; color:#12546d; font-weight:650 } details { background:white; border:1px solid var(--line); border-radius:10px; padding:13px 16px; margin:9px 0 } summary { cursor:pointer; font-weight:650 } .answer { color:var(--muted); margin:12px 0 2px } .hidden { display:none!important } footer { color:var(--muted); font-size:.9rem; margin-top:50px }
-    @media(max-width:760px) { .shell { display:block } nav { position:static; display:flex; overflow:auto; gap:4px; margin-bottom:20px; white-space:nowrap } nav a { border-left:0; border-bottom:2px solid transparent } .grid { grid-template-columns:1fr } header { padding:40px 24px } }
+    @media(max-width:760px) {
+      body { font-size:16px; line-height:1.55 }
+      header { padding:34px 20px 30px } header p { font-size:1rem }
+      .shell { display:block; padding:0 14px 52px }
+      nav { position:sticky; z-index:5; top:0; display:flex; overflow-x:auto; gap:2px; margin:0 -14px; padding:10px 14px 8px; white-space:nowrap; background:var(--paper); border-bottom:1px solid var(--line); -webkit-overflow-scrolling:touch }
+      nav a { flex:none; padding:9px 10px; border-left:0; border-bottom:2px solid transparent; font-size:.9rem }
+      main { padding-top:16px } .search { min-height:48px; margin-bottom:12px; font-size:16px }
+      .filters { gap:8px; margin-bottom:26px; padding:12px; border:1px solid var(--line); border-radius:12px; background:#fff }
+      .filter { flex-wrap:nowrap; overflow-x:auto; padding-bottom:3px; -webkit-overflow-scrolling:touch }
+      .filter b { flex:none; position:sticky; left:0; padding:7px 5px 7px 0; background:#fff; font-size:.82rem }
+      .filter button { flex:none; min-height:40px; padding:7px 12px; font-size:.86rem }
+      section { margin-bottom:34px; scroll-margin-top:64px } h2 { font-size:1.4rem; margin-bottom:12px } h3 { font-size:1.03rem }
+      .grid { grid-template-columns:1fr; gap:11px } .card { padding:16px; border-radius:10px }
+      pre { margin:11px -2px 0; padding:12px; font-size:.78rem; border-radius:7px; white-space:pre-wrap; overflow-wrap:anywhere }
+      table { display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; font-size:.88rem } th, td { min-width:138px; padding:10px } th:first-child, td:first-child { min-width:112px }
+      details { padding:14px; margin:10px 0 } summary { min-height:26px; padding-right:4px }
+    }
   </style>
 </head>
 <body>
